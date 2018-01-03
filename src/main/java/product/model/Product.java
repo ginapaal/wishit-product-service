@@ -25,12 +25,30 @@ public class Product {
 
     private Currency defaultCurrency;
 
-    public boolean isReserved() {
-        return reserved;
-    }
+    private boolean reserved;
+
+    private Integer ownerId;
 
     public Product() {
     }
+
+    public Product(String name,
+                   String type,
+                   String description,
+                   String imageFileName,
+                   float defaultPrice,
+                   Currency defaultCurrency,
+                   int ownerId) {
+        this.name = name;
+        this.type = type;
+        this.description = description;
+        this.imageFileName = imageFileName;
+        this.defaultPrice = defaultPrice;
+        this.defaultCurrency = defaultCurrency;
+        this.reserved = false;
+        this.ownerId = ownerId;
+    }
+
 
     public void setReserved(boolean reserved) {
         this.reserved = reserved;
@@ -43,10 +61,6 @@ public class Product {
     public void setOwnerId(Integer ownerId) {
         this.ownerId = ownerId;
     }
-
-    private boolean reserved;
-
-    private Integer ownerId;
 
     public int getId() {
         return id;
@@ -103,4 +117,9 @@ public class Product {
     public void setDefaultCurrency(Currency defaultCurrency) {
         this.defaultCurrency = defaultCurrency;
     }
+
+    public boolean isReserved() {
+        return reserved;
+    }
+
 }

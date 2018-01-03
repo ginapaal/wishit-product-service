@@ -46,7 +46,7 @@ public class ProductService {
                               Currency defaultCurrency,
                               int ownerId) {
         Product product = new Product(name, type, description, imageFileName, defaultPrice, defaultCurrency, ownerId);
-        productRepository.save(product);
+        productRepository.saveAndFlush(product);
     }
 
     public List<Product> getProductsByUser(int ownerId) {
@@ -57,6 +57,19 @@ public class ProductService {
         productRepository.delete(getProductById(id));
     }
 
+    public void update(int id, String name, String type,
+                       String description, String imageFileName,
+                       float defaultPrice, Currency defaultCurrency, int ownerId) {
+        Product productToUpdate = getProductById(id);
+        productToUpdate.setName(name);
+        productToUpdate.setType(type);
+        productToUpdate.setDescription(description);
+        productToUpdate.setImageFileName(imageFileName);
+        productToUpdate.setDefaultPrice(defaultPrice);
+        productToUpdate.setDefaultCurrency(defaultCurrency);
+
+        productRepository.saveAndFlush(productToUpdate);
+    }
 
 
 

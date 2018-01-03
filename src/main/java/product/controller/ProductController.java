@@ -1,16 +1,6 @@
 package product.controller;
 
-import com.fasterxml.jackson.databind.JsonSerializer;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import product.model.Product;
 import product.service.ProductService;
@@ -26,35 +16,31 @@ public class ProductController {
 
     @GetMapping("/products")
     public List<Product> getAllProducts() {
-        List<Product> allProducts = productService.getAllProducts();
-        return allProducts;
+        return productService.getAllProducts();
     }
 
     @GetMapping("/products/type")
     public List<Product> getProductsByType(@ModelAttribute("typeName") String typeName) {
-        List<Product> productsByType = productService.getAllByType(typeName);
-        return productsByType;
+        return productService.getAllByType(typeName);
     }
 
     @GetMapping("/products/price")
     public List<Product> productsInPriceRange(@ModelAttribute("minPrice") float minPrice,
                                               @ModelAttribute("maxPrice") float maxPrice) {
-        List<Product> productsByPrice = productService.getAllInPriceRange(minPrice, maxPrice);
-        return productsByPrice;
+        return productService.getAllInPriceRange(minPrice, maxPrice);
     }
 
-    @GetMapping("/products/:product_id")
+    @GetMapping("/products/{product_id}")
     public Product getSpecProduct(@PathVariable("product_id") int productId) {
         return productService.getProductById(productId);
     }
 
-    @GetMapping("/:user_id/products")
+    @GetMapping("/{user_id}/products")
     public List<Product> getUsersProducts(@PathVariable("user_id") int userId) {
-        List<Product> usersProducts = productService.getProductsByUser(userId);
-        return usersProducts;
+        return productService.getProductsByUser(userId);
     }
 
-    @PutMapping("/:user_id/products")
+    @PutMapping("/{user_id}/products")
     public void saveProduct(@PathVariable("user_id") int userId,
                               @RequestParam("name") String name,
                               @RequestParam("type") String type,
@@ -65,7 +51,7 @@ public class ProductController {
         productService.uploadProduct(name, type, description, imageFileName, defaultPrice, currency, userId);
     }
 
-    @PostMapping("/:user_id/products/:product_id")
+    @PutMapping("/{user_id}/products/{product_id}")
     public void updateProduct(@PathVariable("user_id") int userId,
                               @RequestParam("name") String name,
                               @RequestParam("type") String type,
@@ -75,7 +61,22 @@ public class ProductController {
                               @RequestParam("defaultCurrency") Currency currency,
                               @PathVariable("product_id") int productId) {
 
-        productService.update(productId, name, type, description, imageFileName, defaultPrice, currency);
+        if (userId == productService.getProductById(productId).getOwnerId()) {
+            productService.update(productId, name, type, description, imageFileName, defaultPrice, currency);
+        } else {
+            System.out.println("User ID and product owner's ID does not match");
+        }
+    }
+
+    @DeleteMapping("/{user_id}/products/{product_id}")
+    public void updateProduct(@PathVariable("user_id") int userId,
+                              @PathVariable("product_id") int productId) {
+
+        if (userId == productService.getProductById(productId).getOwnerId()) {
+            productService.deleteProduct(productId);
+        } else {
+            System.out.println("User ID and product owner's ID does not match");
+        }
     }
 
 }

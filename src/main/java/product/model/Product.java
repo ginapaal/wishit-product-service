@@ -25,8 +25,28 @@ public class Product {
 
     private Currency defaultCurrency;
 
+    public boolean isReserved() {
+        return reserved;
+    }
+
     public Product() {
     }
+
+    public void setReserved(boolean reserved) {
+        this.reserved = reserved;
+    }
+
+    public Integer getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(Integer ownerId) {
+        this.ownerId = ownerId;
+    }
+
+    private boolean reserved;
+
+    private Integer ownerId;
 
     public int getId() {
         return id;

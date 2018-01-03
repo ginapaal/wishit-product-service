@@ -27,7 +27,7 @@ public class ProductService {
         return productRepository.findOne(id);
     }
 
-    public List<Product> getAllInPriceRange(int minPrice, int maxPrice) {
+    public List<Product> getAllInPriceRange(float minPrice, float maxPrice) {
         List<Product> allProducts = getAllProducts();
         List<Product> productsInPriceRange = new ArrayList<>();
         for (Product product: allProducts) {
@@ -59,7 +59,7 @@ public class ProductService {
 
     public void update(int id, String name, String type,
                        String description, String imageFileName,
-                       float defaultPrice, Currency defaultCurrency, int ownerId) {
+                       float defaultPrice, Currency defaultCurrency) {
         Product productToUpdate = getProductById(id);
         productToUpdate.setName(name);
         productToUpdate.setType(type);
@@ -69,6 +69,10 @@ public class ProductService {
         productToUpdate.setDefaultCurrency(defaultCurrency);
 
         productRepository.saveAndFlush(productToUpdate);
+    }
+
+    public void uploadProduct(Product product) {
+        productRepository.saveAndFlush(product);
     }
 
 

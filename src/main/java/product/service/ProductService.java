@@ -1,6 +1,7 @@
 package product.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import product.model.Product;
 import product.repository.ProductRepository;
 
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Currency;
 import java.util.List;
 
+@Service
 public class ProductService {
 
     @Autowired
@@ -54,5 +56,8 @@ public class ProductService {
     public void deleteProduct(int id) {
         productRepository.delete(getProductById(id));
     }
+
+
+
 
 }

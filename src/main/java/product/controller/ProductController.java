@@ -40,8 +40,8 @@ public class ProductController {
         return productService.getProductsByUser(userId);
     }
 
-    @PutMapping("/{user_id}/products")
-    public void saveProduct(@PathVariable("user_id") int userId,
+    @PostMapping("/{user_id}/products")
+    public void uploadProduct(@PathVariable("user_id") int userId,
                               @RequestParam("name") String name,
                               @RequestParam("type") String type,
                               @RequestParam("description") String description,

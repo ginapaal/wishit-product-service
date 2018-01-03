@@ -76,6 +76,20 @@ public class ProductServiceTest {
         assertEquals(1, productService.getAllInPriceRange(5f, 8f).size());
     }
 
+    @Test
+    public void testIsGetUsersProductsWorksFine() {
+        Product product = new Product("o", "book", "k", "k", 5.02f, Currency.getInstance("HUF"), 1);
+        Product product1 = new Product("o", "book", "k", "k", 4f, Currency.getInstance("HUF"), 1);
+
+        List<Product> productList = new ArrayList<>();
+        productList.add(product);
+        productList.add(product1);
+
+        when(productService.getProductsByUser(1)).thenReturn(productList);
+
+        assertEquals(2, productService.getProductsByUser(1).size());
+    }
+
 
 
 }

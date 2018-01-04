@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -cp target/classes:target/dependency/* product.ProductApp
+web: java $JAVA_OPTS -cp target/classes:target/dependency/* ProductApp

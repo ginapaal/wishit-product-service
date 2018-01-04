@@ -28,7 +28,7 @@ public class ProductServiceTest {
     ProductService productService;
 
     @Test
-    public void testIfGetAllWorks() {
+    public void testIsGetAllWorks() {
         Product product = new Product();
         Product product2 = new Product();
 
@@ -42,7 +42,7 @@ public class ProductServiceTest {
     }
 
     @Test
-    public void testIfGetByTypeWorks() {
+    public void testIsGetByTypeWorks() {
         Product product = new Product("o", "book", "k", "k", 5.02f, Currency.getInstance("HUF"), 1);
         Product product1 = new Product("o", "book", "k", "k", 5.02f, Currency.getInstance("HUF"), 1);
         Product product2 = new Product("o", "dish", "k", "k", 5.02f, Currency.getInstance("HUF"), 1);
@@ -73,7 +73,9 @@ public class ProductServiceTest {
 
         when(productService.getAllInPriceRange(5f, 8f)).thenReturn(productList);
 
-        assertEquals(1, productService.getAllInPriceRange(5f, 8f).size());
+        assertAll("Checking for a true and for a false condition",
+                () -> assertEquals(1, productService.getAllInPriceRange(5f, 8f).size()),
+                () -> assertFalse(productService.getAllInPriceRange(5f, 8f).contains(product1)));
     }
 
     @Test

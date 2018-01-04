@@ -88,7 +88,7 @@ hs_err_pid*
 
 # End of https://www.gitignore.io/api/java,intellij+all
 
-application.properties
+#application.properties
 wishit-product-service.iml
 target
 

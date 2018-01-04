@@ -130,7 +130,7 @@
                 <version>2.0.2</version>
                 <configuration>
                     <processTypes>
-                        <web>java $JAVA_OPTS -cp target/classes:target/dependency/* ProductApp</web>
+                        <web>java $JAVA_OPTS -cp target/classes:target/dependency/* product.ProductApp</web>
                     </processTypes>
                 </configuration>
             </plugin>

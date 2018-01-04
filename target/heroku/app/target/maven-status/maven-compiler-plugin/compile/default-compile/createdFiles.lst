@@ -1,0 +1,7 @@
+product/controller/ProductController.class
+product/service/InitializerBean.class
+product/repository/ProductRepository.class
+product/service/ProductService.class
+product/ProductApp.class
+product/model/Product.class
+product/controller/Error.class
